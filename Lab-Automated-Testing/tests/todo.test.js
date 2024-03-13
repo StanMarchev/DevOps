@@ -1,18 +1,19 @@
 const {test, expect} = require ('@playwright/test');
+const appAddress = "http://127.0.0.1:5500/Lab-Automated-Testing/index.html"
 
 test('user can add a task', async ({page}) => {
  
-    await page.goto('http://localhost:5500/');
-    await page.fill('#task-input', 'Task Task');
+    await page.goto(appAddress);
+    await page.fill('#task-input', 'Test Task');
     await page.click('#add-task');
-    const taskTask = await page.textContent('.task');
-    expect(taskTask).toContain('Task Task');
+    const taskText = await page.textContent('.task');
+    expect(taskText).toContain('Test Task');
 
 });
 
 test ('user can delete task', async ({page}) => {
-    await page.goto('http://localhost:5500/');
-    await page.fill('#task-input', 'Task Task');
+    await page.goto(appAddress);
+    await page.fill('#task-input', 'Test Task');
     await page.click('#add-task');
     await page.click('.task .delete-task');
     const tasks = await page.$$eval('.task', 
@@ -21,8 +22,8 @@ test ('user can delete task', async ({page}) => {
 });
 
 test ('user can mark  task', async ({page}) => {
-    await page.goto('http://localhost:5500/');
-    await page.fill('#task-input', 'Task Task');
+    await page.goto(appAddress);
+    await page.fill('#task-input', 'Test Task');
     await page.click('#add-task');
     await page.click('.task .task-complete');
     const completedTask = await page.$('.task.completed');
@@ -30,8 +31,8 @@ test ('user can mark  task', async ({page}) => {
 });
 
 test ('user can filter task', async ({page}) => {
-    await page.goto('http://localhost:5500/');
-    await page.fill('#task-input', 'Task Task');
+    await page.goto(appAddress);
+    await page.fill('#task-input', 'Test Task');
     await page.click('#add-task');
     await page.click('.task .task-complete');
     await page.selectOption('#filter', 'Completed');
